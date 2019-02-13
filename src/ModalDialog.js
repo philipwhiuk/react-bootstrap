@@ -19,6 +19,11 @@ class ModalDialog extends React.Component {
      * Specify whether the Component should be vertically centered
      */
     centered: PropTypes.bool,
+
+    /**
+     * Allows scrolling the `<Modal.Body>` instead of the entire Modal when overflowing.
+     */
+    scrollable: PropTypes.bool,
   };
 
   render() {
@@ -26,20 +31,22 @@ class ModalDialog extends React.Component {
       bsPrefix,
       className,
       centered,
+      scrollable,
       size,
       children,
       ...props
     } = this.props;
 
-    const bsClass = `${bsPrefix}-dialog`;
+    const prefix = `${bsPrefix}-dialog`;
     return (
       <div
         {...props}
         className={classNames(
-          bsClass,
+          prefix,
           className,
           size && `${bsPrefix}-${size}`,
-          centered && `${bsClass}-centered`,
+          centered && `${prefix}-centered`,
+          scrollable && `${prefix}-scrollable`,
         )}
       >
         <div className={classNames(`${bsPrefix}-content`)}>{children}</div>
